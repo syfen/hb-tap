@@ -3,7 +3,7 @@ class DynamodbLocal < Formula
   desc "Client-side database and server imitating DynamoDB"
   homepage "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tools.DynamoDBLocal.html"
   url "https://s3-us-west-2.amazonaws.com/dynamodb-local/dynamodb_local_latest.tar.gz"
-  version "2017-03-13"
+  version "2016-05-17"
   sha256 "4afae454157256e3525df91b5ae2c6b6683ce05f92284e79335b2ac8e2e53762"
 
   bottle :unneeded
@@ -16,7 +16,7 @@ class DynamodbLocal < Formula
     var/"log/dynamodb-local.log"
   end
 
-  def bin_wrapper; <<-EOS.undent
+  def bin_wrapper; <<~EOS
     #!/bin/sh
     cd #{data_path} && exec java -Djava.library.path=#{libexec}/DynamodbLocal_lib -jar #{libexec}/DynamoDBLocal.jar "$@"
     EOS
@@ -32,7 +32,7 @@ class DynamodbLocal < Formula
     data_path.mkpath
   end
 
-  def caveats; <<-EOS.undent
+  def caveats; <<~EOS
     DynamoDB Local supports the Java Runtime Engine (JRE) version 6.x or
     newer; it will not run on older JRE versions.
     In this release, the local database file format has changed;
@@ -45,7 +45,7 @@ class DynamodbLocal < Formula
 
   plist_options :manual => "#{HOMEBREW_PREFIX}/bin/dynamodb-local"
 
-  def plist; <<-EOS.undent
+  def plist; <<~EOS
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
     <plist version="1.0">
